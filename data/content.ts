@@ -15,7 +15,7 @@ import type {
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://arunachala-retreat.ru";
 export const TG_LINK = "https://t.me/blagomir_dharma";
-export const TG_LINK_PAYMENTS = "https://t.me/blagomir_dharma_payments";
+export const TG_LINK_PAYMENTS = "https://t.me/shivanatha_tapasvi/2859";
 
 export const NAV_LINKS: readonly INavLink[] = [
   { label: "О ретрите", href: "#about" },

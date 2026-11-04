@@ -2,7 +2,7 @@
 
 import { Check, Minus } from "lucide-react";
 import { Reveal, SectionHead } from "@/components/Reveal";
-import { PRICING, TG_LINK } from "@/data/content";
+import { PRICING, TG_LINK_PAYMENTS } from "@/data/content";
 import { scrollToId } from "@/lib/scroll";
 
 const Pricing = () => (
@@ -89,7 +89,7 @@ const Pricing = () => (
           Бронирование — после подтверждения наличия мест и предоплаты 50%. Реквизиты — через{" "}
           <a
             data-testid="pricing-telegram-link"
-            href={TG_LINK}
+            href={TG_LINK_PAYMENTS}
             target="_blank"
             rel="noopener noreferrer"
             className="text-saffron underline underline-offset-4 hover:text-jade-ink transition-colors"
