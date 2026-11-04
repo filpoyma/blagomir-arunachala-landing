@@ -40,8 +40,8 @@ const Kashi = () => {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           <SectionHead eyebrow={KASHI.badge} title={KASHI.title} dark />
           <Reveal delay={0.15}>
-            <div className="flex items-end gap-4">
-              <span className="font-serif text-6xl sm:text-7xl text-saffron-2 leading-none">
+            <div className="flex shrink-0 items-end gap-4">
+              <span className="font-serif text-6xl sm:text-7xl text-saffron-2 leading-none whitespace-nowrap">
                 {KASHI.price}
               </span>
               <span className="pb-2 font-mono text-[10px] tracking-[0.25em] uppercase text-paper/50">
