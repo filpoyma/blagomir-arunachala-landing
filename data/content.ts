@@ -16,9 +16,6 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://arunachala-retreat.ru";
 export const TG_LINK = "https://t.me/blagomir_dharma";
 export const TG_LINK_PAYMENTS = "https://t.me/blagomir_dharma_payments";
-export const API_URL =
-  process.env.NEXT_PUBLIC_BOOKING_API_URL ??
-  "https://kashi-arunachala--2stpm7o4.preview.emergentagent.com/api";
 
 export const NAV_LINKS: readonly INavLink[] = [
   { label: "О ретрите", href: "#about" },

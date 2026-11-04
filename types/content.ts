@@ -1,7 +1,5 @@
 export type TBookingTariff = "twin" | "single";
 
-export type TBookingStatus = "new" | "contacted" | "confirmed" | "rejected";
-
 export interface INavLink {
   readonly label: string;
   readonly href: string;
@@ -128,6 +126,8 @@ export interface IBookingFormState {
   readonly contact: string;
   readonly tariff: TBookingTariff;
   readonly kashi: boolean;
+  readonly visitedIndia: boolean;
+  readonly knowsMaster: boolean;
   readonly comment: string;
   readonly consent: boolean;
   readonly website: string;
@@ -137,15 +137,4 @@ export interface IBookingFormErrors {
   name?: string;
   contact?: string;
   consent?: string;
-}
-
-export interface IBookingRecord {
-  readonly id: string;
-  readonly name: string;
-  readonly contact: string;
-  readonly tariff: TBookingTariff;
-  readonly kashi: boolean;
-  readonly comment?: string;
-  readonly status: TBookingStatus;
-  readonly created_at: string;
 }

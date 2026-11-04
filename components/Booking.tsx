@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { InlineCountdown } from "@/components/Countdown";
-import { TG_LINK, API_URL } from "@/data/content";
+import { TG_LINK } from "@/data/content";
 import type {
   IBookingFormErrors,
   IBookingFormState,
@@ -32,6 +32,8 @@ const Booking = () => {
     contact: "",
     tariff: "twin",
     kashi: false,
+    visitedIndia: false,
+    knowsMaster: false,
     comment: "",
     consent: false,
     website: "",
@@ -60,18 +62,18 @@ const Booking = () => {
     setSending(true);
     setServerError("");
     try {
-      const res = await fetch(`${API_URL}/bookings`, {
+      const res = await fetch("/api/bookings", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Website": form.website,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name.trim(),
           contact: form.contact.trim(),
           tariff: form.tariff,
           kashi: form.kashi,
+          visitedIndia: form.visitedIndia,
+          knowsMaster: form.knowsMaster,
           comment: form.comment.trim(),
+          website: form.website,
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -260,28 +262,60 @@ const Booking = () => {
                   </div>
                 </div>
 
-                <label
-                  data-testid="booking-kashi-toggle"
-                  className="flex items-start gap-4 cursor-pointer group"
-                >
-                  <span
-                    className={`mt-0.5 w-5 h-5 shrink-0 border flex items-center justify-center transition-colors duration-300 ${
-                      form.kashi
-                        ? "bg-saffron border-saffron"
-                        : "border-paper/40 group-hover:border-saffron"
-                    }`}
-                    onClick={() => set("kashi", !form.kashi)}
-                  >
-                    {form.kashi && <Check size={12} className="text-jade-3" />}
-                  </span>
-                  <span
-                    className="text-sm text-paper/75 leading-relaxed"
-                    onClick={() => set("kashi", !form.kashi)}
-                  >
-                    Интересует продолжение в Варанаси «Каши: за пределами времени» (13–16 января,
-                    +$1 100)
-                  </span>
-                </label>
+                <div className="space-y-5">
+                  {(
+                    [
+                      {
+                        key: "kashi",
+                        testId: "booking-kashi-toggle",
+                        label:
+                          "Интересует продолжение в Варанаси «Каши: за пределами времени» (13–16 января, +$1 100)",
+                      },
+                      {
+                        key: "visitedIndia",
+                        testId: "booking-visited-india-toggle",
+                        label: "Я уже был(а) в Индии",
+                      },
+                      {
+                        key: "knowsMaster",
+                        testId: "booking-knows-master-toggle",
+                        label: "Я знаком(а) с мастером",
+                      },
+                    ] as const
+                  ).map((item) => (
+                    <label
+                      key={item.key}
+                      data-testid={item.testId}
+                      className="flex items-start gap-4 cursor-pointer group"
+                    >
+                      <span
+                        role="checkbox"
+                        aria-checked={form[item.key]}
+                        tabIndex={0}
+                        onClick={() => set(item.key, !form[item.key])}
+                        onKeyDown={(e) => {
+                          if (e.key === " " || e.key === "Enter") {
+                            e.preventDefault();
+                            set(item.key, !form[item.key]);
+                          }
+                        }}
+                        className={`mt-0.5 w-5 h-5 shrink-0 border flex items-center justify-center transition-colors duration-300 ${
+                          form[item.key]
+                            ? "bg-saffron border-saffron"
+                            : "border-paper/40 group-hover:border-saffron"
+                        }`}
+                      >
+                        {form[item.key] && <Check size={12} className="text-jade-3" />}
+                      </span>
+                      <span
+                        className="text-sm text-paper/75 leading-relaxed"
+                        onClick={() => set(item.key, !form[item.key])}
+                      >
+                        {item.label}
+                      </span>
+                    </label>
+                  ))}
+                </div>
 
                 <div>
                   <label
