@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [{ url: "/icons/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icons/apple-touch-icon.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     type: "website",
     locale: "ru_RU",
