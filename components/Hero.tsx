@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { IMAGES } from "@/data/content";
@@ -44,14 +45,22 @@ const Hero = () => {
       className="relative min-h-[100svh] flex flex-col overflow-hidden bg-jade-3"
     >
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <motion.img
-          src={IMAGES.hero}
-          alt="Священная гора Аруначала на рассвете"
-          className="w-full h-[120%] object-cover"
-          initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+        <motion.div
+          className="w-full h-full"
+          initial={{ scale: 1.15 }}
+          animate={{ scale: 1 }}
           transition={{ duration: 2, ease: EASE }}
-        />
+        >
+          <Image
+            src={IMAGES.hero}
+            alt="Священная гора Аруначала на рассвете — Тируваннамалай, Индия"
+            width={1920}
+            height={1280}
+            preload
+            sizes="100vw"
+            className="w-full h-[120%] object-cover"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-jade-3/80 via-jade-3/45 to-jade-3" />
         <div className="absolute inset-0 bg-jade/25 mix-blend-multiply" />
       </motion.div>

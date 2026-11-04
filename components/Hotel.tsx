@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { HOTELS } from "@/data/content";
 
@@ -27,10 +28,12 @@ const Hotel = () => (
               className="group block border border-saffron/25 bg-paper hover:border-saffron/50 transition-colors duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron/60 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
               <div className="overflow-hidden">
-                <img
+                <Image
                   src={h.img}
-                  alt={h.name}
-                  loading="lazy"
+                  alt={`Отель ${h.name} (${h.city})`}
+                  width={1200}
+                  height={675}
+                  sizes="(max-width: 1024px) 100vw, 600px"
                   className="w-full aspect-[16/9] object-cover sepia-[0.2] group-hover:sepia-0 group-hover:scale-[1.04] transition-all duration-[1300ms]"
                 />
               </div>

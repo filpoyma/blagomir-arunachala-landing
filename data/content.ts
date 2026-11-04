@@ -12,6 +12,8 @@ import type {
   IPricing,
 } from "@/types/content";
 
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://arunachala-retreat.ru";
 export const TG_LINK = "https://t.me/blagomir_dharma";
 export const TG_LINK_PAYMENTS = "https://t.me/blagomir_dharma_payments";
 export const API_URL =
@@ -39,7 +41,7 @@ export const IMAGES: IImages = {
   varanasi: `${IMG}/kashi/varanasi-hero.jpg`,
   shreeGaneshaPalace: `${IMG}/hotels/shree-ganesha-palace.jpg`,
   aarti: `${IMG}/kashi/aarti.jpg`,
-  leader: `${IMG}/leader.png`,
+  leader: `${IMG}/leader.jpg`,
 };
 
 export const MARQUEE_ITEMS: readonly string[] = [
@@ -349,7 +351,7 @@ export const PRICING: IPricing = {
 
 export const KASHI: IKashiModule = {
   badge: "УГЛУБЛЁННОЕ ПРОДОЛЖЕНИЕ · 13–16 ЯНВАРЯ 2027",
-  title: "КАШИ́ - ДРЕВНИЙ ВАРВНАСИ: ЗА ПРЕДЕЛАМИ ВРЕМЕНИ",
+  title: "КАШИ́ — ДРЕВНИЙ ВАРАНАСИ: ЗА ПРЕДЕЛАМИ ВРЕМЕНИ",
   price: "+$1 100",
   intro:
     "Для тех, кто готов продолжить исследование Шива-таттвы — четыре дня в древнейшем городе мира: даршан Каши Вишванатха, рассвет над Гангой, Ганга-арти, храм Дурги, созерцание Маникарники и выезд к ступе Дхамекх в Сарнатхе.",

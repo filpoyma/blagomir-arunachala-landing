@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { LEADER, IMAGES } from "@/data/content";
@@ -15,10 +16,12 @@ const Leader = () => (
               className="absolute -inset-3 sm:-inset-5 border border-saffron/40 pointer-events-none"
             />
             <div className="relative overflow-hidden">
-              <img
+              <Image
                 src={IMAGES.leader}
-                alt={LEADER.name}
-                loading="lazy"
+                alt={`${LEADER.name} — ведущий ретрита Аруначала`}
+                width={1254}
+                height={1254}
+                sizes="(max-width: 1024px) 100vw, 448px"
                 className="w-full aspect-[4/5] object-cover hover:scale-[1.03] transition-all duration-[1200ms]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-jade-3/50 via-transparent to-transparent" />

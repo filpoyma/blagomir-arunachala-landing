@@ -47,10 +47,15 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    forceMount
+    className="accordion-content-panel text-sm"
     {...props}
   >
-    <div className={joinClasses("pb-4 pt-0", className)}>{children}</div>
+    <div className="accordion-content-grid">
+      <div className="accordion-content-inner">
+        <div className={joinClasses("pb-4 pt-0", className)}>{children}</div>
+      </div>
+    </div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;

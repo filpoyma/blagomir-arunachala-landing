@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { PLACES } from "@/data/content";
 
@@ -13,10 +14,12 @@ const Places = () => (
           <Reveal key={p.name} delay={0.08 * i} className={i % 2 === 1 ? "sm:mt-14" : ""}>
             <figure className="group relative overflow-hidden">
               <div className="overflow-hidden">
-                <img
+                <Image
                   src={p.img}
-                  alt={p.name}
-                  loading="lazy"
+                  alt={`${p.name} — святыня Тируваннамалая`}
+                  width={1200}
+                  height={900}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
                   className="w-full aspect-[4/3] object-cover sepia-[0.3] saturate-[0.85] group-hover:sepia-0 group-hover:saturate-100 group-hover:scale-[1.05] transition-all duration-[1400ms] ease-out"
                 />
               </div>

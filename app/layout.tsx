@@ -1,10 +1,71 @@
 import type { Metadata, Viewport } from "next";
+import { IMAGES, LEADER, SITE_URL } from "@/data/content";
 import "./globals.css";
 
+const SITE_TITLE = "Ретрит Аруначала 2–12 января 2027 | Свами Благомир";
+const SITE_DESCRIPTION =
+  "Духовный ретрит в Тируваннамалае: Аруначала, садхана, Шива-таттва, ашрам Раманы Махарши и гиривалам. 2–12 января 2027. От $1 800, проживание и завтраки включены. Продолжение в Варанаси (Каши) +$1 100.";
+
 export const metadata: Metadata = {
-  title: "Ретрит Аруначала 2–12 января 2027 | Свами Благомир",
-  description:
-    "Духовный ретрит в Тируваннамалае: Аруначала, садхана, Шива-таттва, ашрам Раманы. 2–12 января 2027. От $1 800, проживание и завтраки включены. Продолжение в Варанаси +$1 100.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s | Ретрит Аруначала 2027",
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "ретрит Аруначала",
+    "Тируваннамалай ретрит 2027",
+    "Свами Благомир",
+    "Школа Дхарма108",
+    "Шива Дева-Парампара",
+    "паломничество в Индию 2027",
+    "ашрам Раманы Махарши",
+    "гиривалам",
+    "ретрит в Варанаси",
+    "Каши ретрит",
+    "садхана",
+    "атма-вичара",
+  ],
+  authors: [{ name: LEADER.name }],
+  creator: "Школа Дхарма108",
+  publisher: "Школа Дхарма108",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: "/",
+    siteName: "Школа Дхарма108 · Ретрит Аруначала",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: IMAGES.hero,
+        width: 1920,
+        height: 1280,
+        alt: "Священная гора Аруначала на рассвете — ретрит 2–12 января 2027",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [IMAGES.hero],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {

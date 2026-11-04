@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { DayAccordion } from "@/components/DayAccordion";
@@ -23,10 +24,12 @@ const Kashi = () => {
       className="relative bg-jade-3 py-24 sm:py-36 overflow-hidden"
     >
       <motion.div className="absolute inset-0" style={{ y }}>
-        <img
+        <Image
           src={IMAGES.varanasi}
-          alt="Гаты Варанаси на рассвете"
-          loading="lazy"
+          alt="Рассвет над Гангой и гхаты древнего Варанаси (Каши)"
+          width={1920}
+          height={1211}
+          sizes="100vw"
           className="w-full h-[116%] object-cover opacity-25 sepia-[0.3]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-jade-3 via-jade-3/70 to-jade-3" />

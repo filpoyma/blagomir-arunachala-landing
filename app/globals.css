@@ -5,3 +5,39 @@
     @apply font-sans;
   }
 }
+
+/* Radix resets transition-duration on the Content node itself while measuring,
+   so the transition must live on a child wrapper. */
+.accordion-content-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 320ms ease;
+}
+
+.accordion-content-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordion-content-panel[data-state="open"] > .accordion-content-grid {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-content-panel[data-state="closed"] > .accordion-content-grid {
+  visibility: hidden;
+  transition:
+    grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 320ms ease,
+    visibility 0s linear 420ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-content-grid,
+  .accordion-content-panel[data-state="closed"] > .accordion-content-grid {
+    transition: none;
+  }
+}
