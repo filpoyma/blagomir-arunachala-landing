@@ -3,6 +3,7 @@
 import { Check, Minus } from "lucide-react";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { PRICING, TG_LINK_PAYMENTS } from "@/data/content";
+import { setPreferredBookingTariff } from "@/lib/booking-tariff-preference";
 import { scrollToId } from "@/lib/scroll";
 
 const Pricing = () => (
@@ -36,7 +37,10 @@ const Pricing = () => (
               </p>
               <button
                 data-testid={`pricing-book-btn-${t.id}`}
-                onClick={() => scrollToId("#booking")}
+                onClick={() => {
+                  setPreferredBookingTariff(t.id);
+                  scrollToId("#booking");
+                }}
                 className="mt-7 w-full py-4 rounded-full border border-saffron/50 text-saffron-2 text-sm font-semibold tracking-wide hover:bg-saffron hover:text-jade-3 transition-colors duration-300"
               >
                 Выбрать тариф

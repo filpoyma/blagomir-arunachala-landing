@@ -1,11 +1,17 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Reveal, SectionHead } from "@/components/Reveal";
 import { InlineCountdown } from "@/components/Countdown";
 import { TG_LINK } from "@/data/content";
+import {
+  BOOKING_TARIFF_EVENT,
+  getPreferredBookingTariffServerSnapshot,
+  getPreferredBookingTariffSnapshot,
+  subscribePreferredBookingTariff,
+} from "@/lib/booking-tariff-preference";
 import type {
   IBookingFormErrors,
   IBookingFormState,
@@ -27,10 +33,17 @@ const TARIFF_OPTIONS: readonly ITariffOption[] = [
 ];
 
 const Booking = () => {
-  const [form, setForm] = useState<IBookingFormState>({
+  const [userTariff, setUserTariff] = useState<TBookingTariff | null>(null);
+  const pricingTariff = useSyncExternalStore(
+    subscribePreferredBookingTariff,
+    getPreferredBookingTariffSnapshot,
+    getPreferredBookingTariffServerSnapshot
+  );
+  const tariff = userTariff ?? pricingTariff;
+
+  const [form, setForm] = useState<Omit<IBookingFormState, "tariff">>({
     name: "",
     contact: "",
-    tariff: "twin",
     kashi: false,
     visitedIndia: false,
     knowsMaster: false,
@@ -43,12 +56,18 @@ const Booking = () => {
   const [serverError, setServerError] = useState("");
   const [sent, setSent] = useState(false);
 
-  const set = <K extends keyof IBookingFormState>(
+  const set = <K extends keyof Omit<IBookingFormState, "tariff">>(
     k: K,
-    v: IBookingFormState[K]
+    v: Omit<IBookingFormState, "tariff">[K]
   ): void => {
     setForm((f) => ({ ...f, [k]: v }));
   };
+
+  useEffect(() => {
+    const onTariffFromPricing = (): void => setUserTariff(null);
+    window.addEventListener(BOOKING_TARIFF_EVENT, onTariffFromPricing);
+    return () => window.removeEventListener(BOOKING_TARIFF_EVENT, onTariffFromPricing);
+  }, []);
 
   const submit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -68,7 +87,7 @@ const Booking = () => {
         body: JSON.stringify({
           name: form.name.trim(),
           contact: form.contact.trim(),
-          tariff: form.tariff,
+          tariff,
           kashi: form.kashi,
           visitedIndia: form.visitedIndia,
           knowsMaster: form.knowsMaster,
@@ -242,16 +261,16 @@ const Booking = () => {
                         key={t.id}
                         type="button"
                         data-testid={`booking-tariff-${t.id}`}
-                        onClick={() => set("tariff", t.id)}
+                        onClick={() => setUserTariff(t.id)}
                         className={`text-left p-5 border transition-all duration-300 ${
-                          form.tariff === t.id
+                          tariff === t.id
                             ? "border-saffron bg-saffron/10"
                             : "border-paper/20 hover:border-paper/40"
                         }`}
                       >
                         <span
                           className={`block font-serif text-xl ${
-                            form.tariff === t.id ? "text-saffron-2" : "text-paper"
+                            tariff === t.id ? "text-saffron-2" : "text-paper"
                           }`}
                         >
                           {t.label}

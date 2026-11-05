@@ -13,7 +13,7 @@ import type {
 } from "@/types/content";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://arunachala-retreat.ru";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://dharma-retreat.org";
 export const TG_LINK = "https://t.me/blagomir_dharma";
 export const TG_LINK_PAYMENTS = "https://t.me/shivanatha_tapasvi/2859";
 
